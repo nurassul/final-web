@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Projects & Portfolio — FORMA Studio</title>
+        <link rel="stylesheet" href="fonts/fonts.css" />
+        <link href="vendor/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="js/theme.js"></script>
+    </head>
+    <body class="d-flex flex-column min-vh-100 page-projects">
+        <a class="skip-link" href="#mainContent">Skip to content</a>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg border-bottom sticky-top shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">FORMA.</a>
+                <div class="site-preferences">
+                    <label for="languageSelect" class="visually-hidden">Language</label>
+                    <select id="languageSelect" class="language-select" aria-label="Language">
+                        <option value="en" lang="en">EN</option>
+                        <option value="ru" lang="ru">RU</option>
+                        <option value="kk" lang="kk">ҚАЗ</option>
+                    </select>
+                    <button
+                        id="themeToggle"
+                        class="theme-toggle"
+                        type="button"
+                        aria-pressed="false"
+                        aria-label="Dark theme"
+                    >
+                        <span aria-hidden="true">◐</span><span class="theme-label">Dark theme</span>
+                    </button>
+                </div>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#studioNav"
+                    aria-controls="studioNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="studioNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services.html">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="projects.html"
+                                >Projects</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="nav-cta ms-lg-3 mt-3 mt-lg-0">
+                        <a href="contact.html" class="btn btn-outline-dark btn-sm px-3"
+                            >Get Started</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <header class="page-header text-center">
+            <div class="container">
+                <span class="text-uppercase text-secondary small fw-semibold"
+                    >Built Work & Concepts</span
+                >
+                <h1 class="display-5 fw-bold mt-2 mb-3">Our Project Portfolio</h1>
+                <p class="lead text-secondary mx-auto mb-0" style="max-width: 680px">
+                    Selected architectural residences, modern commercial offices, and civic
+                    pavilions.
+                </p>
+            </div>
+        </header>
+
+        <main id="mainContent" tabindex="-1" class="container my-5">
+            <div class="portfolio-tools mb-4">
+                <div class="project-search">
+                    <label for="projectSearch" class="form-label">Search projects</label>
+                    <input
+                        id="projectSearch"
+                        type="search"
+                        class="form-control"
+                        placeholder="Name, city or description"
+                        maxlength="100"
+                        autocomplete="off"
+                        aria-controls="projectGrid"
+                    />
+                </div>
+                <p id="projectCount" data-live role="status" class="small text-secondary mb-0">
+                    Loading projects…
+                </p>
+            </div>
+            <div class="d-flex flex-wrap gap-2 mb-5" role="group" aria-label="Project categories">
+                <button
+                    type="button"
+                    class="filter-btn active"
+                    data-filter="all"
+                    aria-pressed="true"
+                >
+                    All Projects
+                </button>
+                <button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="architecture"
+                    aria-pressed="false"
+                >
+                    Architecture
+                </button>
+                <button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="interior"
+                    aria-pressed="false"
+                >
+                    Interior
+                </button>
+                <button
+                    type="button"
+                    class="filter-btn"
+                    data-filter="cultural"
+                    aria-pressed="false"
+                >
+                    Cultural
+                </button>
+            </div>
+            <div id="projectGrid" class="row g-4" data-live></div>
+            <div id="noProjects" class="empty-projects" hidden>
+                <h2 class="h4">No projects found</h2>
+                <p class="text-secondary">Try another search or reset the filters.</p>
+                <button id="resetProjects" class="btn btn-outline-dark" type="button">
+                    Reset search and filters
+                </button>
+            </div>
+            <p class="small text-secondary mt-4">
+                Student portfolio concepts. Photographs are visual references, not completed work by
+                this studio.
+            </p>
+        </main>
+
+        <template id="projectCardTemplate">
+            <div class="col-12 col-md-6 project-item">
+                <article class="custom-card h-100 d-flex flex-column">
+                    <div class="card-img-wrapper">
+                        <img src="" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <span
+                            class="project-category badge bg-light text-dark align-self-start mb-2"
+                        ></span>
+                        <h2 class="project-name h5 fw-bold"></h2>
+                        <p class="project-summary text-secondary small flex-grow-1"></p>
+                        <div
+                            class="project-card-footer d-flex justify-content-between align-items-center gap-3 mt-3 pt-3 border-top"
+                        >
+                            <span class="project-location small text-secondary"></span>
+                            <button
+                                class="project-open btn btn-outline-dark btn-sm"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#projectModal"
+                            ></button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </template>
+
+        <div
+            class="modal fade"
+            id="projectModal"
+            tabindex="-1"
+            aria-labelledby="projectModalTitle"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="projectModalTitle" class="modal-title h5" data-live></h2>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <img class="project-detail-image w-100 mb-3" src="images/1.avif" alt="" data-live />
+                        <h3 class="h6">Project Overview</h3>
+                        <p class="project-description text-secondary" data-live></p>
+                        <dl class="project-facts">
+                            <div>
+                                <dt>Area:</dt>
+                                <dd class="project-area" data-live></dd>
+                            </div>
+                            <div>
+                                <dt>Year:</dt>
+                                <dd class="project-year" data-live></dd>
+                            </div>
+                            <div>
+                                <dt>City:</dt>
+                                <dd class="project-city" data-live></dd>
+                            </div>
+                            <div>
+                                <dt>Type:</dt>
+                                <dd class="project-type" data-live></dd>
+                            </div>
+                        </dl>
+                        <p class="project-credit small text-secondary" hidden>
+                            <span>Reference photo:</span>
+                            <a target="_blank" rel="noopener noreferrer" data-live></a>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <a class="project-inquiry btn btn-dark" href="contact.html"
+                            >Inquire Similar Project</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Offline copy for direct file opening. The HTTP version loads data/projects.json. -->
+        <script type="application/json" id="projectsOffline">
+            [
+                {
+                    "id": "north-ridge",
+                    "name": "North Ridge Residence",
+                    "category": "architecture",
+                    "city": "Almaty",
+                    "year": 2024,
+                    "area": 420,
+                    "type": "Residential",
+                    "image": "images/1.avif",
+                    "alt": "Modern Minimalist Villa Facade",
+                    "summary": "A private residence with generous glazing, warm wood finishes and a sheltered garden terrace.",
+                    "description": "The residential concept brings daylight into the living spaces through floor-to-ceiling windows. Deep roof edges shade the terrace, while timber surfaces connect the house to its garden."
+                },
+                {
+                    "id": "prism-office",
+                    "name": "Prism Office Hub",
+                    "category": "interior",
+                    "city": "Astana",
+                    "year": 2023,
+                    "area": 1150,
+                    "type": "Commercial",
+                    "image": "images/office.webp",
+                    "alt": "Office interior with shared tables and pendant lighting",
+                    "summary": "A shared workspace with generous tables, pendant lighting and an open industrial ceiling.",
+                    "description": "This office concept balances collaborative work with a calm material palette. Shared tables encourage conversation, while suspended lighting defines smaller working areas within the open room.",
+                    "credit": {
+                        "author": "Tim Schmidbauer",
+                        "url": "https://unsplash.com/photos/yEh5-9l9L3A"
+                    }
+                },
+                {
+                    "id": "kora-center",
+                    "name": "Kora Cultural Center",
+                    "category": "cultural",
+                    "city": "Shymkent",
+                    "year": 2022,
+                    "area": 3200,
+                    "type": "Cultural / Civic",
+                    "image": "images/cultural-center.webp",
+                    "alt": "Geometric facade and roof of a cultural centre",
+                    "summary": "A cultural venue defined by a sculptural roof, strong geometry and a generous public approach.",
+                    "description": "The cultural centre concept explores how a distinctive roof can give a public building its identity. A clear entrance and sheltered circulation connect gathering spaces, exhibitions and performance areas.",
+                    "credit": {
+                        "author": "Kara M",
+                        "url": "https://unsplash.com/photos/UprLv_V_2LU"
+                    }
+                },
+                {
+                    "id": "echo-resort",
+                    "name": "Echo Thermal Resort",
+                    "category": "architecture",
+                    "city": "Borovoe",
+                    "year": 2023,
+                    "area": 2400,
+                    "type": "Hospitality",
+                    "image": "images/forest-spa.webp",
+                    "alt": "Outdoor spa pool surrounded by trees and lounge chairs",
+                    "summary": "An outdoor spa retreat where warm water, quiet terraces and woodland shape the experience.",
+                    "description": "The retreat concept places a thermal pool at the centre of a sheltered outdoor landscape. Seating areas and planted edges create places to pause, with views of the surrounding trees throughout the site.",
+                    "credit": {
+                        "author": "Storiès",
+                        "url": "https://unsplash.com/photos/jI9vXU8RqaA"
+                    }
+                },
+                {
+                    "id": "monolith-archive",
+                    "name": "Monolith Archive",
+                    "category": "cultural",
+                    "city": "Astana",
+                    "year": 2021,
+                    "area": 4800,
+                    "type": "Civic Archive",
+                    "image": "images/library.webp",
+                    "alt": "Curved white library shelves filled with books",
+                    "summary": "A bright library interior with continuous white bookshelves, soft curves and warm timber floors.",
+                    "description": "The library concept uses curved shelving to guide movement between collections and reading areas. White surfaces reflect daylight, while the timber floor brings warmth to a quiet public interior.",
+                    "credit": {
+                        "author": "CHUTTERSNAP",
+                        "url": "https://unsplash.com/photos/AG2Ct_DqCh0"
+                    }
+                },
+                {
+                    "id": "glass-pavilion",
+                    "name": "Glass Pavilion",
+                    "category": "interior",
+                    "city": "Almaty",
+                    "year": 2022,
+                    "area": 180,
+                    "type": "Gallery Pavilion",
+                    "image": "images/7.avif",
+                    "alt": "Garden pavilion with timber walls and large glazed openings",
+                    "summary": "A garden pavilion combining timber surfaces, large glazed openings and a connection to the landscape.",
+                    "description": "The pavilion concept links a flexible exhibition room with an outdoor garden. Large openings frame the planting, while warm wall finishes give the small building a domestic sense of scale."
+                }
+            ]
+        </script>
+
+        <!-- Footer -->
+        <footer class="py-5 text-light mt-auto">
+            <div class="container">
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-md-4">
+                        <h3 class="h5 fw-bold text-white mb-3">FORMA.</h3>
+                        <p class="small text-secondary mb-3">
+                            Architectural and interior design studio crafting timeless spaces with
+                            functional clarity and structural honesty.
+                        </p>
+                        <div
+                            id="officeStatusBadge"
+                            data-live
+                            class="badge bg-secondary text-white py-2 px-3"
+                        >
+                            Checking studio status...
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <h4 class="h6 text-uppercase text-white fw-bold mb-3">Pages</h4>
+                        <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="projects.html">Projects</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <h4 class="h6 text-uppercase text-white fw-bold mb-3">Services</h4>
+                        <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                            <li><a href="services.html">Architecture Planning</a></li>
+                            <li><a href="services.html">Interior Architecture</a></li>
+                            <li><a href="services.html">3D Spatial Modeling</a></li>
+                            <li><a href="services.html">Digital Design</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h4 class="h6 text-uppercase text-white fw-bold mb-3">Studio</h4>
+                        <address class="small text-secondary mb-0 not-italic">
+                            Dostyk Ave 42, Business Hub<br />
+                            Astana, Kazakhstan<br />
+                            Email: info@forma.example<br />
+                            Phone: +7 (7172) 555-0199
+                        </address>
+                    </div>
+                </div>
+
+                <div class="footer-divider pt-4 text-center small text-secondary">
+                    <p class="mb-0">
+                        © 2026 FORMA. — Student concept. Projects and studio details are
+                        illustrative.
+                    </p>
+                </div>
+            </div>
+        </footer>
+        <button id="backToTopBtn" type="button" title="Back to top" aria-label="Back to top">
+            &#8593;
+        </button>
+        <script src="vendor/jquery-3.7.1.min.js"></script>
+        <script src="vendor/bootstrap.bundle.min.js"></script>
+        <script src="js/translations.js"></script>
+        <script src="js/language.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/projects.js"></script>
+    </body>
+</html>
